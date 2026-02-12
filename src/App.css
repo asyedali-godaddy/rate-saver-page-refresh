@@ -39,6 +39,10 @@ main {
   min-width: 0;
 }
 
+.main-content--full {
+  grid-column: 1 / -1;
+}
+
 .chart-header {
   display: flex;
   flex-direction: row;

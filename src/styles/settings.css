@@ -1,0 +1,298 @@
+/* Figma node 32-7996: Settings header + in-page nav */
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+/* Titles/Title XXL - Page Titles: GD Sherpa, Bold 700, #111 */
+.settings-page-title {
+  margin: 0;
+  font-weight: 700;
+  color: #111111;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+/* In-page nav: inactive #767676, active #111, underline #1bdbdb, no gray background */
+.settings-page .ux-tabs-shell :where(button, a) {
+  color: #767676;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  background: transparent;
+}
+
+.settings-page .ux-tabs-shell :where(button, a):hover,
+.settings-page .ux-tabs-shell :where(button, a):focus {
+  background: transparent;
+}
+
+.settings-page .ux-tabs-shell :where(button, a)[aria-selected="true"] {
+  color: #111111;
+}
+
+/* intent(ux.navigateSecondaryChosen.borderColor) underline, 4px */
+.settings-page .ux-tabs-shell [data-design="underline"]:where(button, a)[aria-selected="true"] {
+  box-shadow: inset 0 -4px 0 0 #1bdbdb;
+}
+
+/* Rate Saver tab */
+.settings-rate-saver {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.rate-saver-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.rate-saver-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rate-saver-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: #00A38D;
+  color: #fff;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.rate-saver-headline {
+  margin: 0;
+}
+
+.rate-saver-description {
+  margin: 0;
+  color: #444;
+  line-height: 1.5;
+}
+
+.rate-saver-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rate-saver-video-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #16c0c8;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.rate-saver-video-link:hover {
+  text-decoration: underline;
+}
+
+.rate-saver-hero-media {
+  min-width: 0;
+}
+
+.rate-saver-video-placeholder {
+  aspect-ratio: 16 / 10;
+  background: #E8EDF2;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.rate-saver-play-icon {
+  font-size: 2.5rem;
+  color: #767676;
+}
+
+.rate-saver-video-label {
+  font-size: 0.75rem;
+  color: #767676;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.rate-saver-summary-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.rate-saver-saved-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  background: #D8EFEF;
+  border-radius: 8px;
+  min-width: 200px;
+}
+
+.rate-saver-saved-label {
+  font-weight: 600;
+  color: #111;
+}
+
+.rate-saver-saved-sublabel {
+  color: #444;
+}
+
+.rate-saver-estimate-card {
+  max-width: 360px;
+}
+
+.rate-saver-estimate-desc {
+  margin: 0;
+  color: #444;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.rate-saver-estimate-note {
+  color: #767676;
+}
+
+.rate-saver-section-title {
+  margin: 0 0 1rem;
+}
+
+.rate-saver-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rate-saver-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.rate-saver-fee-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.rate-saver-fee-item {
+  font-weight: 600;
+  color: #111;
+}
+
+.rate-saver-card-desc {
+  margin: 0;
+  color: #444;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.rate-saver-terminal-mock {
+  background: #f5f5f5;
+  border-radius: 6px;
+  padding: 1rem;
+  border: 1px solid #E8EDF2;
+}
+
+.rate-saver-receipt-mock {
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.rate-saver-notice {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rate-saver-notice-desc {
+  margin: 0;
+  color: #444;
+  line-height: 1.5;
+}
+
+.rate-saver-notice-mock {
+  max-width: 280px;
+}
+
+.rate-saver-notice-poster {
+  background: #fff;
+  border: 1px solid #E8EDF2;
+  border-radius: 6px;
+  padding: 2rem;
+  text-align: center;
+  font-weight: 600;
+  color: #444;
+}
+
+.rate-saver-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rate-saver-faq-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #E8EDF2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rate-saver-faq-item {
+  border-bottom: 1px solid #E8EDF2;
+}
+
+.rate-saver-faq-item:last-child {
+  border-bottom: none;
+}
+
+.rate-saver-faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: none;
+  border: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: #111;
+  transition: background-color 0.15s ease;
+}
+
+.rate-saver-faq-question:hover {
+  background-color: #F5F7F8;
+}
+
+.rate-saver-faq-answer {
+  padding: 0 1.25rem 1rem;
+}
+
+.rate-saver-faq-answer p {
+  margin: 0;
+  color: #444;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

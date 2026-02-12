@@ -1,21 +1,26 @@
+/* Figma design tokens: navigate #444, chosen #111, highlight #09757a, LG=24 MD=16 SM=8, radius 6 */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 280px;
   height: 100vh;
-  background-color: #f0f0f0;
-  padding: 3rem 1rem;
+  background-color: #FAFAFA;
+  padding: 48px 16px 24px;
   box-sizing: border-box;
-  background-color: var(--ux-9i7okd);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 2rem;
+  gap: 24px;
+  overflow: hidden;
+  font-family: var(--ux-1067ph9, 'gdsherpa', sans-serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .sidebar-header {
-  padding: 0 0.5rem;
+  padding: 0 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,34 +32,43 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 4px;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
 }
 
+/* Inactive: intent(ux.feedbackHighContrastPassive.feedbackColor) */
 .sidebar-menu-item {
-  padding: 0.5rem;
+  padding: 8px 12px;
   border-radius: 6px;
-  color: #444444;
+  color: var(--ux-1igc26q, #767676);
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.75rem;
+  gap: 12px;
+}
+
+.sidebar-menu-item svg {
+  color: inherit;
+  fill: currentColor;
 }
 
 .sidebar-menu-item:hover {
-  background-color: #E8EAEB;
+  background-color: #f5f7f8;
 }
 
 .sidebar-menu-item.active {
-  background-color: #D8EFEF;
+  background-color: var(--ux-rm5d87, rgba(9, 117, 122, 0.12));
   color: #111111;
 }
 
 .sidebar-menu-divider {
-  border-top: 1px solid #111111;
-  opacity: 0.1;
-  margin: 0.5rem 0;
+  border: none;
+  border-top: 1px solid #E3E3E3;
+  margin: 8px 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -63,20 +77,98 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 8px 12px;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 500;
   width: 100%;
   text-align: left;
   box-sizing: border-box;
+  color: #111111;
 }
 
 .sidebar-menu-item-badge {
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
   color: #111111;
-  padding: 0 5px;
-  border-radius: 50px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.sidebar-menu-item-badge-new,
+.sidebar-menu-item-badge-add,
+.sidebar-menu-item-badge-for-you {
+  background-color: #09757a;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+}
+
+/* Expandable Settings section */
+.sidebar-menu-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu-item-expandable {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  font: inherit;
+  /* intent(ux.feedbackHighContrastPassive.feedbackColor) when inactive; .active overrides */
+  color: var(--ux-1igc26q, #767676);
+}
+
+.sidebar-menu-item-expandable .sidebar-chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.sidebar-submenu {
+  list-style: none;
+  padding: 0 0 0 24px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-submenu-item {
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--ux-1igc26q, #767676);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.sidebar-submenu-item svg {
+  color: inherit;
+  fill: currentColor;
+}
+
+.sidebar-submenu-item:hover {
+  background-color: #f5f7f8;
+}
+
+.sidebar-submenu-item.active {
+  background-color: var(--ux-rm5d87, rgba(9, 117, 122, 0.12));
+  color: #111111;
 }

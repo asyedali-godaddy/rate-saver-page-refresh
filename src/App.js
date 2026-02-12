@@ -1,6 +1,7 @@
 import Card from '@ux/card';
 import Sidebar from './components/sidebar';
 import UtilityNav from './components/utility-nav';
+import Settings from './pages/Settings';
 import Logo from './assets/logo.png';
 import Illo from './assets/illo.png';
 import text from '@ux/text';
@@ -14,7 +15,7 @@ import Button from '@ux/button';
 import Tabs from '@ux/tabs';
 import Checkbox from '@ux/checkbox';
 import ChevronRight from '@ux/icon/chevron-right';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import '@ux/tabs/styles';
 import '@ux/text/styles';
@@ -29,7 +30,26 @@ import '@ux/checkbox/styles';
 import '@ux/icon/chevron-right/styles';
 import './App.css';
 
+function getPageFromPath() {
+  const path = window.location.pathname.replace(/\/$/, '') || '/';
+  return path === '/settings' ? 'settings' : 'dashboard';
+}
+
 function App() {
+  const [currentPage, setCurrentPage] = useState(() => getPageFromPath());
+
+  useEffect(() => {
+    const onPopState = () => setCurrentPage(getPageFromPath());
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  const onNavigate = (page) => {
+    setCurrentPage(page);
+    const path = page === 'settings' ? '/settings' : '/';
+    window.history.pushState({ page }, '', path);
+  };
+
   const items = [
     { id: 'website', text: 'Website' },
     { id: 'marketing', text: 'Marketing' },
@@ -52,13 +72,21 @@ function App() {
   return (
     <div className="App">
       <UtilityNav />
-      <Sidebar />
+      <Sidebar onNavigate={onNavigate} currentPage={currentPage} />
       <div className="container">
-        <header>
-          <img src={Logo} alt="The Eden Edit" />
-          <text.h1 as='heading'>The Eden Edit</text.h1>
-        </header>
+        {currentPage === 'dashboard' && (
+          <header>
+            <img src={Logo} alt="The Eden Edit" />
+            <text.h1 as='heading'>The Eden Edit</text.h1>
+          </header>
+        )}
         <main>
+          {currentPage === 'settings' ? (
+            <div className="main-content main-content--full">
+              <Settings />
+            </div>
+          ) : (
+          <>
           <div className="main-content">
             <Box inlinePadding='lg' blockPadding='lg' elevation='card' gap='lg'>
               <div className="checklist-header">
@@ -140,6 +168,8 @@ function App() {
               </div>
             </Card>
           </div>
+          </>
+          )}
         </main>
       </div>
     </div>

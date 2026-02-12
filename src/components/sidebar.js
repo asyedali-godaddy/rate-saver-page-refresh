@@ -1,45 +1,141 @@
+import { useState, useEffect } from 'react';
 import GDIcon from '@ux/icon/gd-the-go';
 import SidebarCollapse from '@ux/icon/sidebar-collapse';
 import ChevronDown from '@ux/icon/chevron-down';
-import Bullets from '@ux/icon/bulleted-list';
-import Dashboard from '@ux/icon/dashboard';
-import Website from '@ux/icon/website';
-import Conversations from '@ux/icon/conversations';
-import Shipping from '@ux/icon/shipping';
-import Users from '@ux/icon/users3';
-import Megaphone from '@ux/icon/megaphone';
-import Settings from '@ux/icon/settings';
-import Mail from '@ux/icon/mail-open';
-import World from '@ux/icon/world';
+import ChevronUp from '@ux/icon/chevron-up';
 import Receipt from '@ux/icon/receipt';
-import Graph from '@ux/icon/graph';
-import Shop from '@ux/icon/sm-business';
-import Discount from '@ux/icon/discount';
+import Dashboard from '@ux/icon/dashboard';
+import Transactions from '@ux/icon/transactions';
+import Cart from '@ux/icon/cart';
+import Users from '@ux/icon/users3';
+import Payouts from '@ux/icon/payouts';
+import Briefcase from '@ux/icon/briefcase';
+import BarGraph from '@ux/icon/bar-graph';
+import AllSaleschannels from '@ux/icon/all-saleschannels';
+import SmartTerminal from '@ux/icon/smart-terminal';
+import ReceiptOk from '@ux/icon/reciept-ok';
+import Website from '@ux/icon/website';
+import AllPaytools from '@ux/icon/all-paytools';
+import PayLinks from '@ux/icon/pay-links';
+import VirtualTerminal from '@ux/icon/virtual-terminal';
+import Invoice from '@ux/icon/invoice';
 import Apps from '@ux/icon/apps2';
+import Settings from '@ux/icon/settings';
 import text from '@ux/text';
 
 import '../styles/sidebar.css';
 import '@ux/icon/gd-the-go/styles';
 import '@ux/icon/sidebar-collapse/styles';
 import '@ux/icon/chevron-down/styles';
-import '@ux/icon/bulleted-list/styles'; 
-import '@ux/icon/dashboard/styles';
-import '@ux/icon/website/styles';
-import '@ux/icon/conversations/styles';
-import '@ux/icon/shipping/styles';
-import '@ux/icon/users3/styles';
-import '@ux/icon/megaphone/styles';
-import '@ux/icon/settings/styles';
-import '@ux/icon/mail-open/styles';
-import '@ux/icon/world/styles';
+import '@ux/icon/chevron-up/styles';
 import '@ux/icon/receipt/styles';
-import '@ux/icon/graph/styles';
-import '@ux/icon/sm-business/styles';
-import '@ux/icon/discount/styles';
+import '@ux/icon/dashboard/styles';
+import '@ux/icon/transactions/styles';
+import '@ux/icon/cart/styles';
+import '@ux/icon/users3/styles';
+import '@ux/icon/payouts/styles';
+import '@ux/icon/briefcase/styles';
+import '@ux/icon/bar-graph/styles';
+import '@ux/icon/all-saleschannels/styles';
+import '@ux/icon/smart-terminal/styles';
+import '@ux/icon/reciept-ok/styles';
+import '@ux/icon/website/styles';
+import '@ux/icon/all-paytools/styles';
+import '@ux/icon/pay-links/styles';
+import '@ux/icon/virtual-terminal/styles';
+import '@ux/icon/invoice/styles';
 import '@ux/icon/apps2/styles';
+import '@ux/icon/settings/styles';
 import '@ux/text/styles';
 
-function Sidebar() {
+const ICON_SIZE = 24;
+
+function Sidebar({ onNavigate, currentPage }) {
+  const [settingsExpanded, setSettingsExpanded] = useState(false);
+  const [activeId, setActiveId] = useState('dashboard');
+
+  useEffect(() => {
+    if (currentPage === 'settings') {
+      setSettingsExpanded(true);
+      setActiveId('payments');
+    }
+  }, [currentPage]);
+
+  const isActive = (id) => activeId === id;
+
+  const handleSettingsToggle = () => {
+    const nextExpanded = !settingsExpanded;
+    setSettingsExpanded(nextExpanded);
+    if (nextExpanded) {
+      setActiveId('payments');
+      onNavigate?.('settings');
+    }
+  };
+
+  const handleNavClick = (id) => {
+    setActiveId(id);
+    if (id === 'payments' || id === 'users' || id === 'online-store') {
+      onNavigate?.('settings');
+    } else {
+      onNavigate?.('dashboard');
+    }
+  };
+
+  const renderMenuItem = (id, Icon, label, badge) => (
+    <li
+      key={id}
+      className={`sidebar-menu-item ${isActive(id) ? 'active' : ''}`}
+      onClick={() => handleNavClick(id)}
+      onKeyDown={(e) => e.key === 'Enter' && handleNavClick(id)}
+      role="button"
+      tabIndex={0}
+    >
+      {Icon && <Icon height={ICON_SIZE} width={ICON_SIZE} />}
+      {label}
+      {badge && badge}
+    </li>
+  );
+
+  const renderSubItem = (id, label, badge, Icon) => (
+    <li
+      key={id}
+      className={`sidebar-submenu-item ${isActive(id) ? 'active' : ''}`}
+      onClick={() => handleNavClick(id)}
+      onKeyDown={(e) => e.key === 'Enter' && handleNavClick(id)}
+      role="button"
+      tabIndex={0}
+    >
+      {Icon && <Icon height={ICON_SIZE} width={ICON_SIZE} />}
+      {label}
+      {badge && badge}
+    </li>
+  );
+
+  const renderExpandable = (groupKey, expanded, setExpanded, label, Icon, badge, children) => (
+    <li key={groupKey} className="sidebar-menu-group">
+      <button
+        type="button"
+        className={`sidebar-menu-item sidebar-menu-item-expandable ${expanded ? 'active' : ''}`}
+        onClick={() => (groupKey === 'settings' ? handleSettingsToggle() : setExpanded((prev) => !prev))}
+        aria-expanded={expanded}
+      >
+        {Icon && <Icon height={ICON_SIZE} width={ICON_SIZE} />}
+        {label}
+        {badge && badge}
+        {expanded ? (
+          <ChevronUp height={ICON_SIZE} width={ICON_SIZE} className="sidebar-chevron" />
+        ) : (
+          <ChevronDown height={ICON_SIZE} width={ICON_SIZE} className="sidebar-chevron" />
+        )}
+      </button>
+      {expanded && (
+        <ul className="sidebar-submenu" role="list">
+          {children}
+        </ul>
+      )}
+    </li>
+  );
+
   return (
     <nav className="sidebar">
       <div className="sidebar-header">
@@ -47,78 +143,58 @@ function Sidebar() {
         <SidebarCollapse height={24} width={24} />
       </div>
       <button className="context-switcher">
-        <text.span as='action'>The Eden Edit</text.span>
+        <text.span as="action">The Eden Edit</text.span>
         <ChevronDown height={24} width={24} />
       </button>
       <ul className="sidebar-menu">
-        <li className="sidebar-menu-item active">
-          <Dashboard height={24} width={24} />
-          Dashboard
-        </li>
-        <li className="sidebar-menu-item">
-          <Bullets height={24} width={24} />
-          Orders
-          <text.span as='caption' size={-2} className="sidebar-menu-item-badge">5</text.span>
-        </li>
-        <li className="sidebar-menu-item">
-          <Conversations height={24} width={24} />
-          Conversations
-          <text.span as='caption' size={-2} className="sidebar-menu-item-badge">8</text.span>
-        </li>
+        {renderMenuItem('dashboard', Dashboard, 'Dashboard')}
+        {renderMenuItem('orders', Receipt, 'Orders')}
+        {renderMenuItem('transactions', Transactions, 'Transactions')}
         <hr className="sidebar-menu-divider" />
-        <li className="sidebar-menu-item">
-          <Receipt height={24} width={24} />
-          Finances
-        </li>
-        <li className="sidebar-menu-item">
-          <Graph height={24} width={24} />
-          Reports
-        </li>
+        {renderMenuItem('catalog', Cart, 'Catalog')}
+        {renderMenuItem('customers', Users, 'Customers')}
         <hr className="sidebar-menu-divider" />
-        <li className="sidebar-menu-item">
-          <Megaphone height={24} width={24} />
-          Marketing
-        </li>
-        <li className="sidebar-menu-item">
-          <Website height={24} width={24} />
-          Website
-        </li>
+        {renderMenuItem('payouts', Payouts, 'Payouts')}
+        {renderMenuItem('capital', Briefcase, 'Capital', (
+          <text.span as="caption" size={-2} className="sidebar-menu-item-badge sidebar-menu-item-badge-new">NEW</text.span>
+        ))}
+        {renderMenuItem('reports', BarGraph, 'Reports')}
         <hr className="sidebar-menu-divider" />
-        <li className="sidebar-menu-item">
-          <Shipping height={24} width={24} />
-          Catalog
-        </li>
-        <li className="sidebar-menu-item">
-          <Shop height={24} width={24} />
-          Ways to Sell
-        </li>
-        <li className="sidebar-menu-item">
-          <Users height={24} width={24} />
-          Customers
-        </li>
+        {renderMenuItem('sales-channels', AllSaleschannels, 'Sales Channels', (
+          <text.span as="caption" size={-2} className="sidebar-menu-item-badge sidebar-menu-item-badge-add">ADD</text.span>
+        ))}
+        {renderMenuItem('in-person', SmartTerminal, 'In Person')}
+        {renderMenuItem('online-ordering', ReceiptOk, 'Online Ordering')}
+        {renderMenuItem('online-store-channel', Website, 'Online Store', (
+          <text.span as="caption" size={-2} className="sidebar-menu-item-badge sidebar-menu-item-badge-for-you">FOR YOU</text.span>
+        ))}
         <hr className="sidebar-menu-divider" />
-        <li className="sidebar-menu-item">
-          <Mail height={24} width={24} />
-          Email
-        </li>
-        <li className="sidebar-menu-item">
-          <World height={24} width={24} />
-          Domain
-        </li>
+        {renderMenuItem('payment-tools', AllPaytools, 'Payment Tools', (
+          <text.span as="caption" size={-2} className="sidebar-menu-item-badge sidebar-menu-item-badge-add">ADD</text.span>
+        ))}
+        {renderMenuItem('pay-links', PayLinks, 'Pay Links')}
+        {renderMenuItem('virtual-terminal', VirtualTerminal, 'Virtual Terminal')}
+        {renderMenuItem('invoicing', Invoice, 'Invoicing')}
         <hr className="sidebar-menu-divider" />
-        <li className="sidebar-menu-item">
-          <Discount height={24} width={24} />
-          Deals
-        </li>
-        <li className="sidebar-menu-item">
-          <Apps height={24} width={24} />
-          Apps and Integrations
-        </li>
+        {renderMenuItem('app-center', Apps, 'App Center', (
+          <text.span as="caption" size={-2} className="sidebar-menu-item-badge sidebar-menu-item-badge-add">ADD</text.span>
+        ))}
         <hr className="sidebar-menu-divider" />
-        <li className="sidebar-menu-item">
-          <Settings height={24} width={24} />
-          Settings
-        </li>
+        {renderExpandable(
+          'settings',
+          settingsExpanded,
+          setSettingsExpanded,
+          'Settings',
+          Settings,
+          null,
+          <>
+            {renderSubItem('payments', 'Payments')}
+            {renderSubItem('users', 'Users', (
+              <text.span as="caption" size={-2} className="sidebar-menu-item-badge sidebar-menu-item-badge-new">NEW</text.span>
+            ))}
+            {renderSubItem('online-store', 'Online Store')}
+          </>
+        )}
       </ul>
     </nav>
   );
