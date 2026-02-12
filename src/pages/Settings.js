@@ -71,7 +71,7 @@ function Settings() {
               </p>
               <div className="rate-saver-actions">
                 <Button design="primary" size="md">Choose a plan</Button>
-                <button type="button" className="rate-saver-video-link">▷ Watch Video</button>
+                <a href={`${process.env.PUBLIC_URL || ''}/assets/videos/${encodeURIComponent('Rate Saver _ Explainer.mov')}`} target="_blank" rel="noopener noreferrer" className="rate-saver-video-link">▷ Watch Video</a>
               </div>
             </div>
             <div className="rate-saver-hero-media">
