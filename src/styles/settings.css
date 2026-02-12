@@ -83,6 +83,7 @@
 
 .rate-saver-sidebar {
   grid-column: 9 / -1;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -214,6 +215,7 @@
   background: #D8EFEF;
   border-radius: 8px;
   min-width: 200px;
+  width: 100%;
 }
 
 .rate-saver-saved-label {
@@ -223,6 +225,19 @@
 
 .rate-saver-saved-sublabel {
   color: #444;
+  font-size: 16px;
+}
+
+.rate-saver-saved-sublabel strong {
+  font-size: 19.8px;
+}
+
+.rate-saver-saved-amount {
+  font-size: 30px;
+}
+
+.rate-saver-estimate-block {
+  width: 100%;
 }
 
 .rate-saver-estimate-card {
