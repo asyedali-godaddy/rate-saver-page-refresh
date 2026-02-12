@@ -1,0 +1,216 @@
+@font-face {
+  font-family: 'gdsherpa';
+  src: url('./assets/GD_Sherpa_Variable.woff2') format('woff2');
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6, p, span {
+  margin: 0;
+}
+
+body {
+  margin-inline-start: 320px;
+  margin-inline-end: 40px;
+}
+
+.container {
+  max-width: 1368px;
+  margin-inline: auto;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block-end: 2.5rem;
+}
+
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 11fr) minmax(0, 5fr);
+  gap: 2.5rem;
+  padding-block-end: 2.5rem;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  min-width: 0;
+}
+
+.chart-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chart-header-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.graph-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  gap: 1rem;
+  margin-block: 0.5rem;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+  gap: 1rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menu-item.active {
+  background-color: #F5F7F8 !important;
+}
+
+.recommendations-card-content {
+  background-color: #D8EFEF;
+  border-radius: 6px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.5rem;
+  box-sizing: border-box;
+}
+
+.recommendations-subgrid {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+}
+
+.main-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ux-card-content {
+  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.payouts-amount {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+.payouts-dollar {
+  display: inline-block;
+  transform: translateY(-14px);
+  margin-right: -8px;
+  font-size: 20px;
+}
+
+.payouts-divider {
+  margin: 1.5rem 0;
+  background-color: #D4DBE0;
+  height: 1px;
+  border: none;
+}
+
+.payouts-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.payouts-info p {
+  margin: 0;
+}
+
+.payouts-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  font-size: 14.22px;
+}
+
+.payouts-info-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  color: #767676;
+  font-size: 12.44px;
+}
+
+.filter-modal-group {
+  min-width: 500px;
+}
+
+/* Checklist styles */
+.checklist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checklist-progress-meta {
+  color: #6b6f76;
+  font-size: 12.44px;
+}
+
+.checklist-progress-rail {
+  height: 4px;
+  border-radius: 4px;
+  background: #E8EDF2;
+  overflow: hidden;
+}
+
+.checklist-progress-bar {
+  height: 100%;
+  width: 10%;
+  background: #16c0c8;
+}
+
+.checklist-list {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0 -1.5rem -1rem -1.5rem;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid #E8EDF2;
+  cursor: pointer;
+  text-align: left;
+}
+
+.checklist-item:first-child {
+  border-top: 0;
+}
+
+.checklist-item:hover {
+  background: #F5F7F8;
+}
+
+.checklist-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
