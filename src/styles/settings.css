@@ -22,6 +22,8 @@
   font-size: 16px;
   line-height: 100%;
   background: transparent;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .settings-page .ux-tabs-shell :where(button, a):hover,
@@ -38,18 +40,65 @@
   box-shadow: inset 0 -4px 0 0 #1bdbdb;
 }
 
-/* Rate Saver tab */
+/* 40px spacing between tab items */
+.settings-page .ux-tabs-shell ul {
+  gap: 40px;
+}
+
+/* No gray line under unselected tab items; active uses box-shadow underline only */
+.settings-page .ux-tabs-shell [data-design="underline"]:where(button, a) {
+  border-bottom: none;
+}
+
+/* Hover: 4px underline using intent(ux.navigateSecondaryHovered.borderColor) */
+.settings-page .ux-tabs-shell [data-design="underline"]:where(button, a):hover:not([aria-selected="true"]) {
+  box-shadow: inset 0 -4px 0 0 var(--ux-1vtao7i);
+}
+
+/* No gray line under scroll control buttons */
+.settings-page .ux-tabs-shell .ux-tabs-controls button {
+  border-bottom: none;
+}
+
+/* No gray line at bottom of tabs nav */
+.settings-page .ux-tabs-shell::after {
+  border-bottom: none;
+}
+
+/* Rate Saver tab: 12-column grid, left 8/12, right 4/12, 24px gap */
 .settings-rate-saver {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.rate-saver-main {
+  grid-column: 1 / span 8;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
+.rate-saver-sidebar {
+  grid-column: 9 / -1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Hero card: white card, rounded corners, 1px border intent(ux.box.borderColor) */
 .rate-saver-hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: start;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid var(--ux-97h3vl);
 }
 
 .rate-saver-hero-content {
@@ -58,27 +107,24 @@
   gap: 1rem;
 }
 
-.rate-saver-badge {
-  display: inline-block;
+/* FREE TRIAL badge: @ux/tag (inline, premium highcontrast) + diamond icon; layout only */
+.settings-page .rate-saver-badge.ux-tag {
   align-self: flex-start;
-  background-color: #00A38D;
-  color: #fff;
-  font-size: 0.625rem;
-  font-weight: 600;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
-  padding: 4px 8px;
-  border-radius: 4px;
 }
 
 .rate-saver-headline {
   margin: 0;
+  font-weight: 700;
+  color: #111;
+  font-size: 31.3px;
 }
 
 .rate-saver-description {
   margin: 0;
   color: #444;
   line-height: 1.5;
+  font-size: 18px;
 }
 
 .rate-saver-actions {
@@ -92,9 +138,10 @@
   border: none;
   padding: 0;
   font: inherit;
-  color: #16c0c8;
+  color: #111;
   cursor: pointer;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .rate-saver-video-link:hover {
@@ -105,27 +152,52 @@
   min-width: 0;
 }
 
-.rate-saver-video-placeholder {
-  aspect-ratio: 16 / 10;
-  background: #E8EDF2;
+/* Hero right: card image + play overlay (button for lightbox trigger) */
+.rate-saver-hero-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: none;
   border-radius: 8px;
+  overflow: hidden;
+  background: #F2F2F2;
+  aspect-ratio: 16 / 10;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.rate-saver-hero-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.rate-saver-hero-play {
+  position: absolute;
+  inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  pointer-events: none;
+  font-size: 3rem;
+  color: rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
-.rate-saver-play-icon {
-  font-size: 2.5rem;
-  color: #767676;
+/* Video lightbox: @ux/modal with video */
+.rate-saver-video-lightbox-video-wrap {
+  max-width: 90vw;
+  max-height: 80vh;
 }
 
-.rate-saver-video-label {
-  font-size: 0.75rem;
-  color: #767676;
-  text-align: center;
-  padding: 0 1rem;
+.rate-saver-video-lightbox-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .rate-saver-summary-row {
@@ -143,6 +215,7 @@
   background: #D8EFEF;
   border-radius: 8px;
   min-width: 200px;
+  width: 100%;
 }
 
 .rate-saver-saved-label {
@@ -152,6 +225,19 @@
 
 .rate-saver-saved-sublabel {
   color: #444;
+  font-size: 16px;
+}
+
+.rate-saver-saved-sublabel strong {
+  font-size: 19.8px;
+}
+
+.rate-saver-saved-amount {
+  font-size: 30px;
+}
+
+.rate-saver-estimate-block {
+  width: 100%;
 }
 
 .rate-saver-estimate-card {
@@ -169,10 +255,15 @@
   color: #767676;
 }
 
+.rate-saver-section-title.ux-text,
 .rate-saver-section-title {
   margin: 0 0 1rem;
+  font-size: 24px !important;
+  font-weight: 700;
+  color: #111;
 }
 
+/* How Rate Saver helps cards (Figma 32-8014) */
 .rate-saver-cards {
   display: flex;
   flex-direction: column;
@@ -181,19 +272,52 @@
 
 .rate-saver-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
-.rate-saver-fee-row {
+.rate-saver-card {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
+  padding: 0;
+  padding-inline: 0;
+  padding-block: 0;
+  overflow: hidden;
+  min-height: 0;
 }
 
-.rate-saver-fee-item {
-  font-weight: 600;
+/* Override @ux/space padding on Card (ux-space--inline-lg, ux-space--block-lg) */
+.rate-saver-cards-grid .rate-saver-card.ux-card-shell {
+  padding: 0;
+  padding-inline: 0;
+  padding-block: 0;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.rate-saver-card-image {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.rate-saver-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 24px;
+}
+
+.rate-saver-card-heading.ux-text,
+.rate-saver-card-heading {
+  margin: 0;
+  font-weight: 700;
   color: #111;
+  font-size: 17px !important;
 }
 
 .rate-saver-card-desc {
@@ -203,44 +327,86 @@
   line-height: 1.5;
 }
 
-.rate-saver-terminal-mock {
-  background: #f5f5f5;
-  border-radius: 6px;
-  padding: 1rem;
-  border: 1px solid #E8EDF2;
-}
-
-.rate-saver-receipt-mock {
-  font-size: 0.875rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
+/* Help customers understand (Figma 32-8036): two-column card + image */
 .rate-saver-notice {
   display: flex;
   flex-direction: column;
+  gap: 0;
+}
+
+.rate-saver-notice-card {
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 40%);
+  gap: 2rem;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid var(--ux-97h3vl);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.rate-saver-notice-content {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+  min-width: 0;
+}
+
+.rate-saver-notice-title {
+  margin: 0;
+  font-weight: 700;
+  color: #111;
+  font-size: 17px;
 }
 
 .rate-saver-notice-desc {
   margin: 0;
   color: #444;
   line-height: 1.5;
+  font-size: 0.9375rem;
 }
 
-.rate-saver-notice-mock {
-  max-width: 280px;
+.rate-saver-notice-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #111;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
-.rate-saver-notice-poster {
-  background: #fff;
-  border: 1px solid #E8EDF2;
-  border-radius: 6px;
-  padding: 2rem;
-  text-align: center;
-  font-weight: 600;
-  color: #444;
+.rate-saver-notice-download:hover {
+  color: #09757A;
+}
+
+.rate-saver-notice-download svg {
+  flex-shrink: 0;
+  color: inherit;
+  fill: currentColor;
+}
+
+.rate-saver-notice-media {
+  min-width: 0;
+}
+
+.rate-saver-notice-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .rate-saver-notice-card {
+    grid-template-columns: 1fr;
+  }
 }
 
 .rate-saver-faq {
@@ -253,17 +419,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  border: 1px solid #E8EDF2;
-  border-radius: 8px;
   overflow: hidden;
-}
-
-.rate-saver-faq-item {
-  border-bottom: 1px solid #E8EDF2;
-}
-
-.rate-saver-faq-item:last-child {
-  border-bottom: none;
 }
 
 .rate-saver-faq-question {
@@ -275,11 +431,17 @@
   padding: 1rem 1.25rem;
   background: none;
   border: none;
+  box-shadow: none;
+  outline: none;
   font: inherit;
   text-align: left;
   cursor: pointer;
   color: #111;
   transition: background-color 0.15s ease;
+}
+
+.rate-saver-faq-question:focus {
+  outline: none;
 }
 
 .rate-saver-faq-question:hover {
