@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "uxcore": {
+      "command": "npx",
+      "args": [
+        "aichemy",
+        "mcp",
+        "@ux/uxcore2-codex",
+        "--registry",
+        "https://gdartifactory1.jfrog.io/artifactory/api/npm/node-virt/"
+      ]
+    }
+  }
+}
